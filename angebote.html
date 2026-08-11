@@ -10,15 +10,10 @@
   <style>
     .offer-block { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; margin-bottom:80px; }
     .offer-block:last-child { margin-bottom:0; }
-    .carousel { position:relative; }
-    .carousel__track {
-      display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
-      scroll-behavior:smooth; padding-bottom:8px; -webkit-overflow-scrolling:touch;
-    }
-    .carousel__track { justify-content:center; }
-    .carousel__track img {
-      flex:0 0 auto; width:88%; max-width:800px; aspect-ratio:3/2; object-fit:cover;
-      border-radius:8px; scroll-snap-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1);
+    .carousel { position:relative; max-width:800px; margin:0 auto; }
+    .carousel__image {
+      display:block; width:100%; aspect-ratio:3/2; object-fit:cover;
+      border-radius:8px; box-shadow:0 4px 24px rgba(0,0,0,0.1);
     }
     .carousel__nav {
       position:absolute; top:50%; transform:translateY(-50%);
@@ -30,7 +25,7 @@
     .carousel__nav:hover { background:#FAF6EF; }
     .carousel__nav--prev { left:-8px; }
     .carousel__nav--next { right:-8px; }
-    @media(max-width:640px){ .carousel__nav{display:none;} }
+    @media(max-width:600px){ .carousel__nav--prev{ left:-4px; } .carousel__nav--next{ right:-4px; } }
     .offer-block:nth-child(even) .offer-block__img { order:-1; }
     .offer-block__img img { width:100%; border-radius:8px; object-fit:cover; aspect-ratio:3/2; box-shadow:0 4px 24px rgba(0,0,0,0.12); }
     .offer-block__text .section-label { margin-bottom:0.4rem; }
@@ -113,7 +108,7 @@
           </div>
         </div>
         <div class="offer-block__img">
-          <img src="images/einzeltraining-huegel.jpg" alt="Einzeltraining: Hundetrainerin arbeitet mit Hund an der Leine" style="aspect-ratio:4/3">
+          <img src="images/einzeltraining-original.jpg" alt="Einzeltraining: Hundetrainerin arbeitet mit Hund an der Leine" style="aspect-ratio:3/4">
         </div>
       </div>
 
@@ -194,14 +189,9 @@
     <div class="container">
       <p class="section-label" style="text-align:center">Impressionen</p>
       <h2 style="text-align:center;margin-bottom:2rem">Training in Aktion</h2>
-      <div class="carousel">
+      <div class="carousel" data-carousel>
         <button type="button" class="carousel__nav carousel__nav--prev" data-carousel-prev aria-label="Zurück">&#8249;</button>
-        <div class="carousel__track">
-          <img src="images/impression-wiese-1.jpg" alt="Hundegruppe entspannt auf der Wiese">
-          <img src="images/impression-tunnel.jpg" alt="Hund läuft durch den Tunnel beim Agility-Training">
-          <img src="images/impression-wiese-2.jpg" alt="Hunde beim gemeinsamen Training auf der Wiese">
-          <img src="images/impression-lagerhalle.jpg" alt="Hundegruppe wartet konzentriert in der Trainingshalle">
-        </div>
+        <img class="carousel__image" src="images/impression-wiese-1.jpg" alt="Hundegruppe entspannt auf der Wiese">
         <button type="button" class="carousel__nav carousel__nav--next" data-carousel-next aria-label="Weiter">&#8250;</button>
       </div>
     </div>
@@ -367,13 +357,24 @@
     })();
   </script>
   <script>
-    document.querySelectorAll('.carousel').forEach(function(carousel){
-      const track = carousel.querySelector('.carousel__track');
-      const step = function(){ return track.firstElementChild.getBoundingClientRect().width + 16; };
+    document.querySelectorAll('[data-carousel]').forEach(function(carousel){
+      const slides = [
+        { src: 'images/impression-wiese-1.jpg', alt: 'Hundegruppe entspannt auf der Wiese' },
+        { src: 'images/impression-tunnel.jpg', alt: 'Hund läuft durch den Tunnel beim Agility-Training' },
+        { src: 'images/impression-wiese-2.jpg', alt: 'Hunde beim gemeinsamen Training auf der Wiese' },
+        { src: 'images/impression-lagerhalle.jpg', alt: 'Hundegruppe wartet konzentriert in der Trainingshalle' }
+      ];
+      let idx = 0;
+      const img = carousel.querySelector('.carousel__image');
+      function show(i){
+        idx = (i + slides.length) % slides.length;
+        img.src = slides[idx].src;
+        img.alt = slides[idx].alt;
+      }
       const prev = carousel.querySelector('[data-carousel-prev]');
       const next = carousel.querySelector('[data-carousel-next]');
-      if (prev) prev.addEventListener('click', function(){ track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-      if (next) next.addEventListener('click', function(){ track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      if (prev) prev.addEventListener('click', function(){ show(idx - 1); });
+      if (next) next.addEventListener('click', function(){ show(idx + 1); });
     });
   </script>
 </body>
