@@ -15,11 +15,11 @@
       display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
       scroll-behavior:smooth; padding-bottom:8px; -webkit-overflow-scrolling:touch;
     }
+    .carousel__track { justify-content:center; }
     .carousel__track img {
-      flex:0 0 auto; width:80%; aspect-ratio:3/2; object-fit:cover;
-      border-radius:8px; scroll-snap-align:start; box-shadow:0 4px 24px rgba(0,0,0,0.1);
+      flex:0 0 auto; width:88%; max-width:800px; aspect-ratio:3/2; object-fit:cover;
+      border-radius:8px; scroll-snap-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1);
     }
-    @media(min-width:700px){ .carousel__track img{ width:31%; } }
     .carousel__nav {
       position:absolute; top:50%; transform:translateY(-50%);
       width:44px; height:44px; border-radius:50%; border:none;
@@ -113,7 +113,7 @@
           </div>
         </div>
         <div class="offer-block__img">
-          <img src="images/einzeltraining-huegel.jpg" alt="Einzeltraining: Hundetrainerin arbeitet mit Hund an der Leine">
+          <img src="images/einzeltraining-huegel.jpg" alt="Einzeltraining: Hundetrainerin arbeitet mit Hund an der Leine" style="aspect-ratio:4/3">
         </div>
       </div>
 
