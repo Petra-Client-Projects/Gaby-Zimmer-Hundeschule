@@ -8,9 +8,10 @@
   <link rel="icon" type="image/png" href="Favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .story-photos { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin:48px 0; }
+    .story-photos { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin:48px 0; align-items:start; }
     .story-photos figure { margin:0; }
     .story-photos img { border-radius:8px; width:100%; object-fit:cover; aspect-ratio:4/3; display:block; }
+    .story-photos figure img { aspect-ratio:3/4; }
     .story-photos figcaption { margin-top:8px; font-size:0.85rem; color:#6B6560; text-align:center; }
     @media(max-width:640px){ .story-photos{grid-template-columns:1fr;} }
   </style>
@@ -35,7 +36,7 @@
   </header>
 
   <!-- PAGE HERO -->
-  <section class="page-hero" style="background-image:url('images/gaby-mit-hunden.jpg')">
+  <section class="page-hero page-hero--compact" style="background-image:url('images/gaby-mit-hunden-hero.jpg')">
     <div class="page-hero__overlay"></div>
     <div class="page-hero__content container">
       <p class="hero__eyebrow">Über mich</p>
