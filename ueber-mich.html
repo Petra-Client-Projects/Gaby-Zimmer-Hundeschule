@@ -7,6 +7,13 @@
   <meta name="description" content="Gaby Zimmer – Hundetrainerin seit 1997, zertifiziert nach §11 TierSchG. Erfahren Sie mehr über ihre Geschichte, Leidenschaft und Philosophie.">
   <link rel="icon" type="image/png" href="Favicon.png">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .story-photos { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin:48px 0; }
+    .story-photos figure { margin:0; }
+    .story-photos img { border-radius:8px; width:100%; object-fit:cover; aspect-ratio:4/3; display:block; }
+    .story-photos figcaption { margin-top:8px; font-size:0.85rem; color:#6B6560; text-align:center; }
+    @media(max-width:640px){ .story-photos{grid-template-columns:1fr;} }
+  </style>
 </head>
 <body>
 
@@ -45,9 +52,13 @@
       <p>Nach Jahren der Ausbildung und intensiver Arbeit mit Hunden verschiedenster Rassen und Charaktere habe ich 1997 meine eigene Hundeschule in Hessisch Oldendorf gegründet. Was klein begann, ist heute ein bewährtes Trainingsprogramm, das Hunderte von Besitzer-Hund-Teams begleitet hat.</p>
       <p>Mein Ansatz ist tierpsychologisch fundiert: Ich verstehe, warum ein Hund so reagiert wie er reagiert – und arbeite genau dort an, wo die eigentliche Ursache liegt. Keine Abkürzungen, keine schnellen Tricks. Dafür nachhaltige Ergebnisse, die halten.</p>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:48px 0">
-        <img src="images/gaby-mit-hunden.jpg" alt="Gaby Zimmer mit ihren Hunden" style="border-radius:8px;width:100%;object-fit:cover;aspect-ratio:4/3">
-        <img src="images/eigene-hunde.png" alt="Die Hunde der Hundeschule Zimmer" style="border-radius:8px;width:100%;object-fit:cover;aspect-ratio:4/3">
+      <div class="story-photos">
+        <img src="images/gaby-mit-hunden.jpg" alt="Gaby Zimmer mit ihren Hunden">
+        <img src="images/eigene-hunde.png" alt="Die Hunde der Hundeschule Zimmer">
+        <figure>
+          <img src="images/jilliana.jpg" alt="Jilliana, Gabys eigene Hündin">
+          <figcaption>Jilliana – arbeitet oft an meiner Seite mit</figcaption>
+        </figure>
       </div>
 
       <p class="section-label">Meine Philosophie</p>
