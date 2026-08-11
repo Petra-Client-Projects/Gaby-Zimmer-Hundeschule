@@ -241,6 +241,7 @@
               <option>Welpenkurs / Junghundekurs</option>
               <option>Sachkundeprüfung §11</option>
               <option>Seminar / Gruppentraining</option>
+              <option>Hausbesuch</option>
               <option>Auslandshund / Tierschutz</option>
               <option>Sonstiges</option>
             </select>
@@ -302,5 +303,14 @@
     </div></div>
   </footer>
   <script>document.querySelector('.nav__toggle').addEventListener('click',function(){const o=document.querySelector('.nav__links').classList.toggle('is-open');this.setAttribute('aria-expanded',o);});</script>
+  <script>
+    (function(){
+      const thema = new URLSearchParams(window.location.search).get('thema');
+      if (!thema) return;
+      const select = document.getElementById('thema');
+      const match = Array.from(select.options).find(function(o){ return o.value === thema; });
+      if (match) select.value = thema;
+    })();
+  </script>
 </body>
 </html>

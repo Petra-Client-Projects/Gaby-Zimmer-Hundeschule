@@ -9,12 +9,15 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     .offer-block { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; margin-bottom:80px; }
+    .offer-block:last-child { margin-bottom:0; }
     .offer-block:nth-child(even) .offer-block__img { order:-1; }
     .offer-block__img img { width:100%; border-radius:8px; object-fit:cover; aspect-ratio:3/2; box-shadow:0 4px 24px rgba(0,0,0,0.12); }
     .offer-block__text .section-label { margin-bottom:0.4rem; }
     .offer-block__text h2 { margin-bottom:1rem; }
     .offer-block__text p { color:#6B6560; }
     .offer-block__text .btn { margin-top:1.4rem; }
+    .offer-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:1.4rem; }
+    .offer-actions .btn { margin-top:0; }
     @media(max-width:768px){.offer-block{grid-template-columns:1fr;gap:28px;margin-bottom:56px;}.offer-block:nth-child(even) .offer-block__img{order:0;}}
     /* Formular / Modal */
     .form-group { margin-bottom:20px; text-align:left; }
@@ -64,7 +67,7 @@
     </nav>
   </header>
 
-  <section class="page-hero" style="background-image:url('images/seminar.jpg')">
+  <section class="page-hero" style="background-image:url('images/gruppenunterricht-wald.jpg')">
     <div class="page-hero__overlay"></div>
     <div class="page-hero__content container">
       <p class="hero__eyebrow">Angebote</p>
@@ -83,7 +86,10 @@
           <p>Manchmal braucht ein Hund mehr als eine Gruppe – nämlich volle Aufmerksamkeit. Im Einzeltraining analysiere ich das Verhalten Ihres Hundes genau, erkenne die Ursachen hinter dem Problem und erarbeite mit Ihnen gemeinsam einen klaren Plan.</p>
           <p>Ob Aggression gegenüber anderen Hunden oder Menschen, Leinenärger, Angst, Rückrufprobleme oder tiefgreifendes Problemverhalten – kein Fall ist zu schwierig. Ich habe Zeit und Geduld für Sie und Ihren Hund.</p>
           <p><strong>Geeignet für:</strong> Hunde mit Problemverhalten, Auslandshunde, Einzelkämpfer, Hunde nach schlechten Erfahrungen.</p>
-          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Einzeltraining">Termin anfragen</a>
+          <div class="offer-actions">
+            <a href="kontakt.html?thema=Einzeltraining" class="btn btn--primary">Termin anfragen</a>
+            <a href="#" class="btn btn--secondary" data-open-modal data-kurs="Einzeltraining">Verbindlich anmelden</a>
+          </div>
         </div>
         <div class="offer-block__img">
           <img src="images/gruppentraining.jpg" alt="Einzeltraining mit Hunden in der Hundeschule Zimmer">
@@ -113,7 +119,10 @@
           <p>Wer in Niedersachsen erstmals einen Hund hält und nicht bereits als sachkundig gilt, benötigt einen Sachkundenachweis. Dieser besteht aus einer theoretischen und einer praktischen Prüfung.</p>
           <p>Die theoretische Prüfung ist vor Aufnahme der Hundehaltung abzulegen, die praktische Prüfung innerhalb des ersten Jahres.</p>
           <p>Als behördlich anerkannte Sachkundeprüferin gemäß § 3 Abs. 3 NHundG nehme ich beide Prüfungsteile ab. Auf Wunsch bereite ich Sie zusätzlich gezielt und praxisnah darauf vor.</p>
-          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Sachkundeprüfung §11">Prüfungstermin anfragen</a>
+          <div class="offer-actions">
+            <a href="kontakt.html?thema=Sachkundepr%C3%BCfung%20%C2%A711" class="btn btn--primary">Prüfungstermin anfragen</a>
+            <a href="#" class="btn btn--secondary" data-open-modal data-kurs="Sachkundeprüfung §11">Verbindlich anmelden</a>
+          </div>
         </div>
         <div class="offer-block__img">
           <img src="images/sachkunde.jpg" alt="Sachkundeprüfung §11 – Hunde mit Besitzern in der Öffentlichkeit">
@@ -131,7 +140,10 @@
           <p>Die Gruppe hat eine besondere Kraft: Hunde lernen voneinander, Besitzer motivieren sich gegenseitig, und die Ablenkung durch andere Hunde und Menschen macht das Training besonders wertvoll.</p>
           <p>Ich biete regelmäßige Kurse in verschiedenen Formaten an – von der Seminarübersicht für den Grundkurs bis zum Wanderseminar in der Natur. Aktuelle Termine und Details auf Anfrage.</p>
           <p><strong>Aktuelle Angebote:</strong> Grundkurs A &amp; B, Junghundekurs, Wanderseminar, Beschäftigung mit dem Hund.</p>
-          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Seminar / Gruppentraining">Seminartermine anfragen</a>
+          <div class="offer-actions">
+            <a href="kontakt.html?thema=Seminar%20%2F%20Gruppentraining" class="btn btn--primary">Seminartermine anfragen</a>
+            <a href="#" class="btn btn--secondary" data-open-modal data-kurs="Seminar / Gruppentraining">Verbindlich anmelden</a>
+          </div>
         </div>
       </div>
 
@@ -143,7 +155,10 @@
           <p>Manche Probleme zeigen sich nur zu Hause – wenn der Hund allein bleiben soll, an der Tür aggressiv reagiert oder in vertrauter Umgebung ganz anders wirkt als im Kurs. Bei einem Hausbesuch sehe ich Ihren Hund genau dort, wo die Herausforderung entsteht, und wir arbeiten direkt an der Situation.</p>
           <p>Typische Anlässe sind Probleme beim Alleinebleiben oder Aggression an der Tür bzw. gegenüber Besuch – grundsätzlich bin ich aber für alle Verhaltensweisen offen, die sich im häuslichen Umfeld zeigen.</p>
           <p><strong>Anfahrt:</strong> Die ersten 10 km sind inklusive, danach berechne ich 50 Cent pro Kilometer.</p>
-          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Hausbesuch">Termin anfragen</a>
+          <div class="offer-actions">
+            <a href="kontakt.html?thema=Hausbesuch" class="btn btn--primary">Termin anfragen</a>
+            <a href="#" class="btn btn--secondary" data-open-modal data-kurs="Hausbesuch">Verbindlich anmelden</a>
+          </div>
         </div>
         <div class="offer-block__img">
           <img src="images/eigene-hunde.png" alt="Hausbesuch-Training der Hundeschule Zimmer">
