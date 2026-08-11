@@ -16,6 +16,33 @@
     .offer-block__text p { color:#6B6560; }
     .offer-block__text .btn { margin-top:1.4rem; }
     @media(max-width:768px){.offer-block{grid-template-columns:1fr;gap:28px;margin-bottom:56px;}.offer-block:nth-child(even) .offer-block__img{order:0;}}
+    /* Formular / Modal */
+    .form-group { margin-bottom:20px; text-align:left; }
+    .form-group label { display:block; font-size:0.88rem; font-weight:700; margin-bottom:6px; color:#2D2A26; }
+    .form-group input, .form-group textarea, .form-group select {
+      width:100%; padding:12px 16px; border:1.5px solid #E8E0D5; border-radius:6px;
+      font-family:inherit; font-size:0.95rem; color:#2D2A26; background:#fff;
+      transition:border-color 0.15s; outline:none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:#F5B800; }
+    .form-group textarea { min-height:100px; resize:vertical; }
+    .form-note { font-size:0.8rem; color:#6B6560; margin-top:12px; text-align:left; }
+    .form-note a { color:#C49100; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(28,26,24,.62);
+      display:none; align-items:flex-start; justify-content:center;
+      padding:40px 20px; z-index:1000; overflow-y:auto;
+    }
+    .modal-overlay.is-open { display:flex; }
+    .modal-box { background:#fff; border-radius:8px; max-width:640px; width:100%; padding:40px; position:relative; text-align:left; }
+    .modal-close {
+      position:absolute; top:14px; right:14px; background:none; border:none;
+      font-size:1.6rem; cursor:pointer; color:#6B6560; line-height:1; padding:8px;
+    }
+    .modal-box h2 { margin-bottom:0.4rem; font-size:1.4rem; }
+    .modal-box__intro { font-size:0.9rem; color:#6B6560; margin-bottom:1.6rem; }
+    @media(max-width:600px){ .form-row{grid-template-columns:1fr;} .modal-box{padding:26px 20px;} }
   </style>
 </head>
 <body>
@@ -32,7 +59,6 @@
         <li><a href="ueber-mich.html">Über mich</a></li>
         <li><a href="angebote.html" class="active">Angebote</a></li>
         <li><a href="tierschutz.html">Tierschutz</a></li>
-        <li><a href="aktuelles.html">Aktuelles</a></li>
         <li><a href="kontakt.html" class="btn btn--nav">Kontakt</a></li>
       </ul>
     </nav>
@@ -57,7 +83,7 @@
           <p>Manchmal braucht ein Hund mehr als eine Gruppe – nämlich volle Aufmerksamkeit. Im Einzeltraining analysiere ich das Verhalten Ihres Hundes genau, erkenne die Ursachen hinter dem Problem und erarbeite mit Ihnen gemeinsam einen klaren Plan.</p>
           <p>Ob Aggression gegenüber anderen Hunden oder Menschen, Leinenärger, Angst, Rückrufprobleme oder tiefgreifendes Problemverhalten – kein Fall ist zu schwierig. Ich habe Zeit und Geduld für Sie und Ihren Hund.</p>
           <p><strong>Geeignet für:</strong> Hunde mit Problemverhalten, Auslandshunde, Einzelkämpfer, Hunde nach schlechten Erfahrungen.</p>
-          <a href="kontakt.html" class="btn btn--primary">Termin anfragen</a>
+          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Einzeltraining">Termin anfragen</a>
         </div>
         <div class="offer-block__img">
           <img src="images/gruppentraining.jpg" alt="Einzeltraining mit Hunden in der Hundeschule Zimmer">
@@ -75,7 +101,7 @@
           <p>Die ersten Monate im Leben eines Hundes entscheiden über vieles: Sozialverhalten, Selbstbewusstsein, die Bindung zum Menschen. Diese Prägungszeit optimal zu nutzen, ist meine Aufgabe.</p>
           <p>Im Welpenkurs lernen junge Hunde spielerisch, was sie fürs Leben brauchen: Grundgehorsam, Umgang mit anderen Hunden und Menschen, Situationssicherheit. Und Sie als Besitzer lernen, Ihren Hund richtig zu lesen und zu führen.</p>
           <p><strong>Anmeldung:</strong> Ab der 12. Lebenswoche möglich. Der Junghundekurs endet spätestens mit dem 7. Lebensmonat.</p>
-          <a href="kontakt.html" class="btn btn--primary">Jetzt anmelden</a>
+          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Welpen- / Junghundekurs">Jetzt anmelden</a>
         </div>
       </div>
 
@@ -87,7 +113,7 @@
           <p>Wer in Niedersachsen erstmals einen Hund hält und nicht bereits als sachkundig gilt, benötigt einen Sachkundenachweis. Dieser besteht aus einer theoretischen und einer praktischen Prüfung.</p>
           <p>Die theoretische Prüfung ist vor Aufnahme der Hundehaltung abzulegen, die praktische Prüfung innerhalb des ersten Jahres.</p>
           <p>Als behördlich anerkannte Sachkundeprüferin gemäß § 3 Abs. 3 NHundG nehme ich beide Prüfungsteile ab. Auf Wunsch bereite ich Sie zusätzlich gezielt und praxisnah darauf vor.</p>
-          <a href="kontakt.html" class="btn btn--primary">Prüfungstermin anfragen</a>
+          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Sachkundeprüfung §11">Prüfungstermin anfragen</a>
         </div>
         <div class="offer-block__img">
           <img src="images/sachkunde.jpg" alt="Sachkundeprüfung §11 – Hunde mit Besitzern in der Öffentlichkeit">
@@ -105,26 +131,123 @@
           <p>Die Gruppe hat eine besondere Kraft: Hunde lernen voneinander, Besitzer motivieren sich gegenseitig, und die Ablenkung durch andere Hunde und Menschen macht das Training besonders wertvoll.</p>
           <p>Ich biete regelmäßige Kurse in verschiedenen Formaten an – von der Seminarübersicht für den Grundkurs bis zum Wanderseminar in der Natur. Aktuelle Termine und Details auf Anfrage.</p>
           <p><strong>Aktuelle Angebote:</strong> Grundkurs A &amp; B, Junghundekurs, Wanderseminar, Beschäftigung mit dem Hund.</p>
-          <a href="kontakt.html" class="btn btn--primary">Seminartermine anfragen</a>
+          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Seminar / Gruppentraining">Seminartermine anfragen</a>
+        </div>
+      </div>
+
+      <!-- Hausbesuche -->
+      <div class="offer-block" id="hausbesuche">
+        <div class="offer-block__text">
+          <p class="section-label">Hausbesuche</p>
+          <h2>Training dort, wo Ihr Hund lebt</h2>
+          <p>Manche Probleme zeigen sich nur zu Hause – wenn der Hund allein bleiben soll, an der Tür aggressiv reagiert oder in vertrauter Umgebung ganz anders wirkt als im Kurs. Bei einem Hausbesuch sehe ich Ihren Hund genau dort, wo die Herausforderung entsteht, und wir arbeiten direkt an der Situation.</p>
+          <p>Typische Anlässe sind Probleme beim Alleinebleiben oder Aggression an der Tür bzw. gegenüber Besuch – grundsätzlich bin ich aber für alle Verhaltensweisen offen, die sich im häuslichen Umfeld zeigen.</p>
+          <p><strong>Anfahrt:</strong> Die ersten 10 km sind inklusive, danach berechne ich 50 Cent pro Kilometer.</p>
+          <a href="#" class="btn btn--primary" data-open-modal data-kurs="Hausbesuch">Termin anfragen</a>
+        </div>
+        <div class="offer-block__img">
+          <img src="images/eigene-hunde.png" alt="Hausbesuch-Training der Hundeschule Zimmer">
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Formulare -->
+  <!-- Anmeldung -->
   <section class="section section--light">
     <div class="container" style="max-width:720px;text-align:center">
       <p class="section-label">Anmeldung</p>
       <h2>Bereit zum Start?</h2>
-      <p>Laden Sie das Anmeldeformular herunter, füllen Sie es aus und schicken Sie es per E-Mail oder Post. Bei Fragen rufen Sie gerne an.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
-        <a href="Formulare/Anmeldung für den Junghundekurs.doc" download class="btn btn--secondary">&#8595; Anmeldung Junghundekurs</a>
-        <a href="Formulare/Anmeldungneu.doc" download class="btn btn--secondary">&#8595; Allgemeines Anmeldeformular</a>
-        <a href="Formulare/Microsoft Word - AGB PDF.pdf" target="_blank" class="btn btn--secondary">&#8595; AGB (PDF)</a>
+      <p>Füllen Sie das Anmeldeformular direkt online aus – ich melde mich schnellstmöglich bei Ihnen zurück. Bei Fragen rufen Sie gerne an.</p>
+      <div style="margin-top:1.5rem">
+        <a href="#" class="btn btn--primary" data-open-modal>Zum Anmeldeformular</a>
       </div>
     </div>
   </section>
+
+  <!-- Anmeldeformular Modal -->
+  <div class="modal-overlay" id="anmelde-modal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" data-close-modal aria-label="Schließen">&times;</button>
+      <h2>Verbindliche Anmeldung</h2>
+      <p class="modal-box__intro">Füllen Sie das Formular aus – ich melde mich schnellstmöglich bei Ihnen zurück.</p>
+      <form action="mailto:hundeschule06@gmail.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anm-vorname">Vorname *</label>
+            <input type="text" id="anm-vorname" name="vorname" required>
+          </div>
+          <div class="form-group">
+            <label for="anm-nachname">Nachname *</label>
+            <input type="text" id="anm-nachname" name="nachname" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="anm-strasse">Straße &amp; Hausnummer *</label>
+          <input type="text" id="anm-strasse" name="strasse" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anm-plz">PLZ *</label>
+            <input type="text" id="anm-plz" name="plz" required>
+          </div>
+          <div class="form-group">
+            <label for="anm-ort">Ort *</label>
+            <input type="text" id="anm-ort" name="ort" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anm-telefon">Telefon *</label>
+            <input type="tel" id="anm-telefon" name="telefon" required>
+          </div>
+          <div class="form-group">
+            <label for="anm-email">E-Mail *</label>
+            <input type="email" id="anm-email" name="email" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="anm-kurs">Kurs *</label>
+          <select id="anm-kurs" name="kurs" required>
+            <option value="">Bitte wählen …</option>
+            <option value="Einzeltraining">Einzeltraining</option>
+            <option value="Welpen- / Junghundekurs">Welpen- / Junghundekurs</option>
+            <option value="Sachkundeprüfung §11">Sachkundeprüfung §11</option>
+            <option value="Seminar / Gruppentraining">Seminar / Gruppentraining</option>
+            <option value="Hausbesuch">Hausbesuch</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anm-hundname">Name des Hundes *</label>
+            <input type="text" id="anm-hundname" name="hundname" required>
+          </div>
+          <div class="form-group">
+            <label for="anm-rasse">Rasse / Mix</label>
+            <input type="text" id="anm-rasse" name="rasse">
+          </div>
+        </div>
+        <div class="form-group" style="max-width:200px">
+          <label for="anm-alter">Alter des Hundes</label>
+          <input type="text" id="anm-alter" name="alter" placeholder="z. B. 8 Monate">
+        </div>
+        <div class="form-group">
+          <label for="anm-anmerkungen">Anmerkungen (optional)</label>
+          <textarea id="anm-anmerkungen" name="anmerkungen" placeholder="z. B. Problemverhalten, besondere Hinweise …"></textarea>
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-start;gap:10px">
+          <input type="checkbox" id="anm-agb" name="agb" required style="width:auto;margin-top:3px;flex-shrink:0">
+          <label for="anm-agb" style="font-weight:400;font-size:0.85rem;cursor:pointer">Ich habe die <a href="agb.html" target="_blank">AGB</a> gelesen und akzeptiere sie. Die Anmeldung ist mit dem Absenden verbindlich. *</label>
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-start;gap:10px">
+          <input type="checkbox" id="anm-dsgvo" name="dsgvo" required style="width:auto;margin-top:3px;flex-shrink:0">
+          <label for="anm-dsgvo" style="font-weight:400;font-size:0.85rem;cursor:pointer">Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;margin-top:8px">Verbindlich anmelden</button>
+      </form>
+      <p class="form-note">* Pflichtfelder. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anmeldung genutzt. <a href="datenschutz.html">Datenschutz</a></p>
+    </div>
+  </div>
 
   <section class="cta-section">
     <div class="container cta-section__inner">
@@ -153,7 +276,6 @@
           <li><a href="ueber-mich.html">Über mich</a></li>
           <li><a href="angebote.html">Angebote</a></li>
           <li><a href="tierschutz.html">Tierschutz</a></li>
-          <li><a href="aktuelles.html">Aktuelles</a></li>
           <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
       </div>
@@ -162,7 +284,7 @@
         <ul>
           <li><a href="impressum.html">Impressum</a></li>
           <li><a href="datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="Formulare/Microsoft Word - AGB PDF.pdf" target="_blank">AGB (PDF)</a></li>
+          <li><a href="agb.html">AGB</a></li>
         </ul>
         <div class="footer__social">
           <a href="https://www.facebook.com/HundeschuleGabyZimmer/" target="_blank" rel="noopener" class="social-link social-link--icon" aria-label="Facebook">
@@ -179,5 +301,28 @@
     </div></div>
   </footer>
   <script>document.querySelector('.nav__toggle').addEventListener('click',function(){const o=document.querySelector('.nav__links').classList.toggle('is-open');this.setAttribute('aria-expanded',o);});</script>
+  <script>
+    (function(){
+      const modal = document.getElementById('anmelde-modal');
+      const kursSelect = document.getElementById('anm-kurs');
+      document.querySelectorAll('[data-open-modal]').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          const kurs = btn.getAttribute('data-kurs');
+          if (kurs) kursSelect.value = kurs;
+          modal.classList.add('is-open');
+        });
+      });
+      document.querySelectorAll('[data-close-modal]').forEach(function(btn){
+        btn.addEventListener('click', function(){ modal.classList.remove('is-open'); });
+      });
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) modal.classList.remove('is-open');
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') modal.classList.remove('is-open');
+      });
+    })();
+  </script>
 </body>
 </html>
