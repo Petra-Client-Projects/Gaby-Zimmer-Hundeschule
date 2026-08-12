@@ -47,6 +47,9 @@
     .form-group textarea { min-height:100px; resize:vertical; }
     .form-note { font-size:0.8rem; color:#6B6560; margin-top:12px; text-align:left; }
     .form-note a { color:#C49100; }
+    .form-success, .form-error { padding:20px; border-radius:6px; font-size:0.95rem; line-height:1.7; }
+    .form-success { background:#F1F7EC; border-left:3px solid #6B9E4A; color:#2D2A26; }
+    .form-error { background:#FBEFEC; border-left:3px solid #C4573A; color:#2D2A26; margin-top:16px; }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0 16px; }
     .modal-overlay {
       position:fixed; inset:0; background:rgba(28,26,24,.62);
@@ -206,7 +209,11 @@
       <button type="button" class="modal-close" data-close-modal aria-label="Schließen">&times;</button>
       <h2>Verbindliche Anmeldung</h2>
       <p class="modal-box__intro">Füllen Sie das Formular aus – ich melde mich schnellstmöglich bei Ihnen zurück.</p>
-      <form action="mailto:hundeschule06@gmail.com" method="post" enctype="text/plain">
+      <form id="anmelde-form" name="anmeldung" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="anmeldung">
+        <p style="position:absolute;left:-9999px">
+          <label>Nicht ausfüllen, falls Sie ein Mensch sind: <input name="bot-field"></label>
+        </p>
         <div class="form-row">
           <div class="form-group">
             <label for="anm-vorname">Vorname *</label>
@@ -280,6 +287,12 @@
         </div>
         <button type="submit" class="btn btn--primary" style="width:100%;margin-top:8px">Verbindlich anmelden</button>
       </form>
+      <div id="anmelde-success" class="form-success" style="display:none">
+        <strong>Danke für Ihre Anmeldung!</strong><br>Ich melde mich schnellstmöglich bei Ihnen zurück.
+      </div>
+      <div id="anmelde-error" class="form-error" style="display:none">
+        Da ist leider etwas schiefgelaufen. Bitte schreiben Sie mir direkt an <a href="mailto:hundeschule06@gmail.com">hundeschule06@gmail.com</a> oder rufen Sie an.
+      </div>
       <p class="form-note">* Pflichtfelder. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anmeldung genutzt. <a href="datenschutz.html">Datenschutz</a></p>
     </div>
   </div>
@@ -340,12 +353,33 @@
     (function(){
       const modal = document.getElementById('anmelde-modal');
       const kursSelect = document.getElementById('anm-kurs');
+      const form = document.getElementById('anmelde-form');
+      const success = document.getElementById('anmelde-success');
+      const error = document.getElementById('anmelde-error');
       document.querySelectorAll('[data-open-modal]').forEach(function(btn){
         btn.addEventListener('click', function(e){
           e.preventDefault();
           const kurs = btn.getAttribute('data-kurs');
           if (kurs) kursSelect.value = kurs;
+          form.style.display = '';
+          success.style.display = 'none';
+          error.style.display = 'none';
           modal.classList.add('is-open');
+        });
+      });
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        error.style.display = 'none';
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        }).then(function(res){
+          if (!res.ok) throw new Error('Netzwerkfehler');
+          form.style.display = 'none';
+          success.style.display = 'block';
+        }).catch(function(){
+          error.style.display = 'block';
         });
       });
       document.querySelectorAll('[data-close-modal]').forEach(function(btn){

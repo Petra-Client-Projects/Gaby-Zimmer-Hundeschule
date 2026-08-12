@@ -65,6 +65,9 @@
     .form-group textarea { min-height:140px; resize:vertical; }
     .form-note { font-size:0.8rem; color:#6B6560; margin-top:12px; }
     .form-note a { color:#C49100; }
+    .form-success, .form-error { padding:20px; border-radius:6px; font-size:0.95rem; line-height:1.7; }
+    .form-success { background:#F1F7EC; border-left:3px solid #6B9E4A; color:#2D2A26; }
+    .form-error { background:#FBEFEC; border-left:3px solid #C4573A; color:#2D2A26; margin-top:16px; }
     .map-placeholder { background:#E8E0D5; border-radius:8px; height:220px; display:flex; align-items:center; justify-content:center; margin-top:32px; }
     .map-placeholder a { color:#C49100; font-weight:700; text-decoration:underline; }
     @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;gap:40px;} .contact-form{padding:24px;} }
@@ -219,7 +222,11 @@
           Schildern Sie Ihren Fall kurz – ich melde mich schnellstmöglich zurück.
         </p>
         <h2 style="margin-bottom:1.4rem;font-size:1.5rem">Nachricht schreiben <svg width="18" height="18" viewBox="0 0 50 50" fill="#F5B800" aria-hidden="true" style="display:inline;vertical-align:middle;opacity:0.55;margin-left:4px"><ellipse cx="10" cy="14" rx="6" ry="7"/><ellipse cx="22" cy="7" rx="6" ry="7"/><ellipse cx="34" cy="7" rx="6" ry="7"/><ellipse cx="44" cy="14" rx="6" ry="7"/><ellipse cx="27" cy="33" rx="14" ry="16"/></svg></h2>
-        <form action="mailto:hundeschule06@gmail.com" method="post" enctype="text/plain">
+        <form id="kontakt-form" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="kontakt">
+          <p style="position:absolute;left:-9999px">
+            <label>Nicht ausfüllen, falls Sie ein Mensch sind: <input name="bot-field"></label>
+          </p>
           <div class="form-group">
             <label for="name">Ihr Name *</label>
             <input type="text" id="name" name="name" required placeholder="Vorname Nachname">
@@ -256,6 +263,12 @@
           </div>
           <button type="submit" class="btn btn--primary" style="width:100%;margin-top:8px">Nachricht absenden</button>
         </form>
+        <div id="kontakt-success" class="form-success" style="display:none">
+          <strong>Danke für Ihre Nachricht!</strong><br>Ich melde mich schnellstmöglich bei Ihnen zurück.
+        </div>
+        <div id="kontakt-error" class="form-error" style="display:none">
+          Da ist leider etwas schiefgelaufen. Bitte schreiben Sie mir direkt an <a href="mailto:hundeschule06@gmail.com">hundeschule06@gmail.com</a> oder rufen Sie an.
+        </div>
         <p class="form-note">* Pflichtfelder. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt. <a href="datenschutz.html">Datenschutz</a></p>
       </div>
 
@@ -310,6 +323,28 @@
       const select = document.getElementById('thema');
       const match = Array.from(select.options).find(function(o){ return o.value === thema; });
       if (match) select.value = thema;
+    })();
+  </script>
+  <script>
+    (function(){
+      const form = document.getElementById('kontakt-form');
+      const success = document.getElementById('kontakt-success');
+      const error = document.getElementById('kontakt-error');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        error.style.display = 'none';
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        }).then(function(res){
+          if (!res.ok) throw new Error('Netzwerkfehler');
+          form.style.display = 'none';
+          success.style.display = 'block';
+        }).catch(function(){
+          error.style.display = 'block';
+        });
+      });
     })();
   </script>
 </body>
